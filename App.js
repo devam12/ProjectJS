@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import {
   Text,
   View,
-  StyleSheet,
-  FlatList
+  FlatList,
 } from 'react-native';
+import UserData  from "./components/UserData";
 
 const App = () => {
-  // const [usename, setUsename] = useState("")
-  // const [password, setPassword] = useState("")
-  // const [email, setEmail] = useState("")
-  // const [display, setDisplay] = useState(false);
 
   const users = [
     {
@@ -35,51 +31,25 @@ const App = () => {
     },
     {
       id: 6,
-      name: "Nisha",
+      name: "Jhanvi",
     },
     {
       id: 7,
-      name: "Jhanvi",
-    },{
-      id: 8,
-      name: "Jhanvi",
-    },{
-      id: 9,
-      name: "Jhanvi",
-    },{
-      id: 10,
-      name: "Jhanvi",
-    },{
-      id: 11,
-      name: "Jhanvi",
-    },{
-      id: 12,
-      name: "Jhanvi",
-    },
+      name: "Aeni",
+    }
   ];
 
   return (
-    <>
-      <View>
-        <Text style={{ textAlign: 'center', fontSize: 30 }}>Flat List</Text>
-        <FlatList
-          data={users}
-          renderItem={({ item }) =>  <Text style={styles.item}>{item.name}</Text> }
-          keyExtractor={item => item.id} />
-      </View>
-    </>
+    <View>
+      <Text style={{ textAlign: 'center', fontSize: 30 }}>Flat List</Text>
+      <FlatList
+        data={users}
+        renderItem={({ item }) => { 
+        return <UserData item={item} /> 
+      }}
+      />
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  item: {
-    fontSize: 24,
-    color: 'black',
-    borderColor: 'red',
-    borderWidth: 2,
-    margin: 5,
-    padding: 2,
-  }
-})
 
 export default App;
