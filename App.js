@@ -2,47 +2,79 @@ import React, { useState } from 'react';
 import {
   Text,
   View,
-  Button,
-  TextInput,
-  StyleSheet
+  StyleSheet,
+  FlatList
 } from 'react-native';
 
 const App = () => {
-  const [usename, setUsename] = useState("")
-  const [password, setPassword] = useState("")
-  const [email, setEmail] = useState("")
-  const [display, setDisplay] = useState(false);
+  // const [usename, setUsename] = useState("")
+  // const [password, setPassword] = useState("")
+  // const [email, setEmail] = useState("")
+  // const [display, setDisplay] = useState(false);
 
-  const displayData = () => {
-    return (
-      <>
+  const users = [
+    {
+      id: 1,
+      name: "Devam",
+    },
+    {
+      id: 2,
+      name: "Darshan",
+    },
+    {
+      id: 3,
+      name: "Priyanka",
+    },
+    {
+      id: 4,
+      name: "Miral",
+    },
+    {
+      id: 5,
+      name: "Akshay",
+    },
+    {
+      id: 6,
+      name: "Nisha",
+    },
+    {
+      id: 7,
+      name: "Jhanvi",
+    },{
+      id: 8,
+      name: "Jhanvi",
+    },{
+      id: 9,
+      name: "Jhanvi",
+    },{
+      id: 10,
+      name: "Jhanvi",
+    },{
+      id: 11,
+      name: "Jhanvi",
+    },{
+      id: 12,
+      name: "Jhanvi",
+    },
+  ];
 
-      </>
-    )
-  }
   return (
     <>
       <View>
-        <TextInput style={styles.text} onChangeText={(value) => { setUsename(value) }} value={usename} placeholder="Enter username"></TextInput>
-        <TextInput style={styles.text} onChangeText={(value) => { setPassword(value) }} value={password} secureTextEntry={true} placeholder="Enter password"></TextInput>
-        <TextInput style={styles.text} onChangeText={(value) => { setEmail(value) }} value={email} placeholder="Enter email"></TextInput>
-        <Button title="Clear Text" onPress={() => { setUsename(''); setPassword(''); setEmail(''); setDisplay(false); }}></Button>
-        <Button title="Display Data" onPress={() => { setDisplay(true) }}></Button>
+        <Text style={{ textAlign: 'center', fontSize: 30 }}>Flat List</Text>
+        <FlatList
+          data={users}
+          renderItem={({ item }) =>  <Text style={styles.item}>{item.name}</Text> }
+          keyExtractor={item => item.id} />
       </View>
-      {
-        display ?
-          <View>
-            <Text style={{ color: "red", fontSize: 20 }}>{usename}</Text>
-            <Text style={{ color: "red", fontSize: 20 }}>{password}</Text>
-            <Text style={{ color: "red", fontSize: 20 }}>{email}</Text> 
-          </View> : null
-      }
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  text: {
+  item: {
+    fontSize: 24,
+    color: 'black',
     borderColor: 'red',
     borderWidth: 2,
     margin: 5,
