@@ -1,56 +1,69 @@
-import React from 'react';
-import { StyleSheet, TouchableHighlight, View ,Text } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-const App = ()=>{
-    return (
-      <View style={styles.main}>
-        <TouchableHighlight>
-          <Text style={[styles.button,styles.success]}> Success </Text>
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <Text style={[styles.button,styles.error]}> Error </Text>
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <Text style={[styles.button,styles.danger]}> Danger </Text>
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <Text style={[styles.button,styles.gold]}> Warning </Text>
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <Text style={[styles.button, styles.primary]}> Primary </Text>
-        </TouchableHighlight>
-        <TouchableHighlight>
-          <Text style={styles.button}> Button </Text>
-        </TouchableHighlight>
-      </View>
-    )
+const App = () => {
+  const [selectedradio,setSeletedradio] = useState(1)
+  return (
+    <View style={styles.main}>
+      <TouchableOpacity onPress={()=>{setSeletedradio(1)}}>
+        <View style={styles.radiowarp}>
+          <View style={styles.radio}>
+            {
+              selectedradio===1 ? <View style={styles.selectedbtn}></View> : null
+            }
+          </View>
+          <Text style={styles.radioText}>Radio 1</Text>
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={()=>{setSeletedradio(2)}}>
+        <View style={styles.radiowarp}>
+          <View style={styles.radio}>
+          {
+              selectedradio===2 ? <View style={styles.selectedbtn}></View> : null
+            }
+          </View>
+          <Text style={styles.radioText}>Radio 2</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-  main:{
-    flex:1,
+  main: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  button:{
-    padding : 10,
-    backgroundColor : 'gray',
-    textAlign : 'center',
-    margin : 10,
-    borderRadius : 10,
+  radioText: {
+    fontSize: 25,
+    paddingTop: 4
   },
-  primary:{
-    backgroundColor:"lightblue"
+  radio: {
+    height: 30,
+    width: 30,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 15,
+    margin: 10,
   },
-  gold:{
-    backgroundColor:"gold"
+  selectedbtn: {
+    height: 20,
+    width: 20,
+    backgroundColor: 'black',
+    borderRadius: 10,
+    margin: 3
   },
-  danger:{
-    backgroundColor : 'red'
+  radiowarp: {
+    flexDirection: 'row',
   },
-  error:{
-    backgroundColor : 'orange'
-  },
-  success:{
-    backgroundColor : 'green'
+  button: {
+    padding: 10,
+    backgroundColor: 'gray',
+    textAlign: 'center',
+    margin: 10,
+    borderRadius: 10,
   }
 })
 
