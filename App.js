@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Text,
-  View,
-  FlatList,
-} from 'react-native';
-import UserData  from "./components/UserData";
+import {Text, View, SectionList} from 'react-native';
 
 const App = () => {
 
@@ -12,41 +7,35 @@ const App = () => {
     {
       id: 1,
       name: "Devam",
+      data : ['c++', 'java']
     },
     {
       id: 2,
-      name: "Darshan",
+      name: "Jhanvi",
+      data : ['c','python']
     },
     {
       id: 3,
-      name: "Priyanka",
+      name: "Meet",
+      data : ['react', 'express']
     },
     {
       id: 4,
-      name: "Miral",
+      name: "Nisha",
+      data : ['java', 'node']
     },
-    {
-      id: 5,
-      name: "Akshay",
-    },
-    {
-      id: 6,
-      name: "Jhanvi",
-    },
-    {
-      id: 7,
-      name: "Aeni",
-    }
+
   ];
 
   return (
     <View>
-      <Text style={{ textAlign: 'center', fontSize: 30 }}>Flat List</Text>
-      <FlatList
-        data={users}
-        renderItem={({ item }) => { 
-        return <UserData item={item} /> 
-      }}
+      <Text style={{ textAlign: 'center', fontSize: 30 , color : 'red' }}>Flat List</Text>
+      <SectionList
+      sections={users}
+      renderSectionHeader={({section:{name}})=>(
+        <Text style={{  fontSize: 30 }}>{name}</Text>
+        )}
+      renderItem={({item})=> <Text style={{ textAlign: 'center', fontSize: 25 }}>{item}</Text>}
       />
     </View>
   );
