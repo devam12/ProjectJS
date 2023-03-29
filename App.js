@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button, Modal, Pressable } from 'react-native';
+import { StyleSheet, View, Text, Button, Modal, Pressable, StatusBar } from 'react-native';
 
 const App = () => {
+  const [show,setShow] = useState(true);
   return (
     <View style={styles.main}>
-      <Pressable>
-        <Text style={styles.button} onPress={() => console.warn("On press")} onLongPress={() => console.warn("On Long press")} onPressIn={() => console.warn("On press In")} onPressOut={() => console.warn("On press Out")}>Click Button</Text>
-      </Pressable>
+      <StatusBar 
+      hidden={show}
+      barStyle="default"
+      backgroundColor={'gray'}
+      />
+      <Button title='Shwow statusbar' onPress={()=>setShow(false)}></Button>
     </View>
   )
 }
