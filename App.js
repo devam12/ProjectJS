@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator, Button } from 'react-native';
+import { StyleSheet, View, Text, Button, Modal } from 'react-native';
 
 const App = () => {
-  const [display, setDisplay] = useState(true)
-
-
- 
-
+  const [show,setShow] = useState(false);
   return (
     <View style={styles.main}>
-
-      <ActivityIndicator
-      size={'small'} color='red' animating={display}
-      ></ActivityIndicator>
-
-    <Button title='Toggle loading' onPress={()=>{setDisplay(!display)}}></Button>
-
-
+      {show ? <Modal transparent={true} visible={show} animationType='fade'>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello code step by step</Text>
+            <Button style={styles.modalButton} title='Close' onPress={()=>{setShow(false)}}></Button>
+          </View>
+        </View>
+      </Modal> : null}
+      <View style={styles.button}>
+        <Button title='Open modal' onPress={()=>{setShow(true)}}></Button>
+      </View>
     </View>
   )
 }
@@ -24,37 +23,29 @@ const App = () => {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  radioText: {
-    fontSize: 25,
-    paddingTop: 4
-  },
-  radio: {
-    height: 30,
-    width: 30,
-    borderWidth: 2,
-    borderColor: 'black',
-    borderRadius: 15,
-    margin: 10,
-  },
-  selectedbtn: {
-    height: 20,
-    width: 20,
-    backgroundColor: 'black',
-    borderRadius: 10,
-    margin: 3
-  },
-  radiowarp: {
-    flexDirection: 'row',
   },
   button: {
-    padding: 10,
+    flex:1,
+    justifyContent:'flex-end',
     backgroundColor: 'gray',
-    textAlign: 'center',
-    margin: 10,
-    borderRadius: 10,
+  },
+  centeredView:{
+    flex:1,
+    justifyContent:'center',
+    alignItems : 'center',
+    
+  },
+  modalView:{
+    backgroundColor:'white',
+    padding:25,
+    borderRadius:20
+  },
+  modalText:{
+    fontSize:25,
+    marginBottom:20
+  },
+  modalButton:{
+    margin:25
   }
 })
 
