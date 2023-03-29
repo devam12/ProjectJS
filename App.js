@@ -1,44 +1,20 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator, Button } from 'react-native';
 
 const App = () => {
-  const [selectedradio, setSeletedradio] = useState(1)
+  const [display, setDisplay] = useState(true)
 
 
-  const skills = [
-    {
-      id: 1,
-      name: "java"
-    },
-    {
-      id: 2,
-      name: "cpp"
-    },
-    {
-      id: 3,
-      name: "react"
-    },
-    {
-      id: 4,
-      name: "nativ"
-    }
-  ]
+ 
+
   return (
     <View style={styles.main}>
 
-      {skills.map((item,index) => {
-        return <TouchableOpacity onPress={() => { setSeletedradio(item.id) }}>
-          <View style={styles.radiowarp}>
-            <View style={styles.radio}>
-              {
-                selectedradio === item.id ? <View style={styles.selectedbtn}></View> : null
-              }
-            </View>
-            <Text style={styles.radioText}>{item.name}</Text>
-          </View>
-        </TouchableOpacity>
-      })}
+      <ActivityIndicator
+      size={'small'} color='red' animating={display}
+      ></ActivityIndicator>
 
+    <Button title='Toggle loading' onPress={()=>{setDisplay(!display)}}></Button>
 
 
     </View>
