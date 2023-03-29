@@ -1,44 +1,32 @@
-import React, { useState } from 'react';
-import {Text, View, SectionList} from 'react-native';
+import React, { Component, useState } from 'react';
+import { Text, View, FlatList, Button, TextInput } from 'react-native';
+import ClassComponent from './components/ClassComponent';
 
-const App = () => {
+class App extends Component {
+  constructor(){
+    super();
+    this.state={
+      name  : "Devam",
+    }
+  }
 
-  const users = [
-    {
-      id: 1,
-      name: "Devam",
-      data : ['c++', 'java']
-    },
-    {
-      id: 2,
-      name: "Jhanvi",
-      data : ['c','python']
-    },
-    {
-      id: 3,
-      name: "Meet",
-      data : ['react', 'express']
-    },
-    {
-      id: 4,
-      name: "Nisha",
-      data : ['java', 'node']
-    },
+  updateName(changeName){
+    this.setState(
+      {
+        name : changeName,
+      }
+    )
+  }
 
-  ];
-
-  return (
-    <View>
-      <Text style={{ textAlign: 'center', fontSize: 30 , color : 'red' }}>Flat List</Text>
-      <SectionList
-      sections={users}
-      renderSectionHeader={({section:{name}})=>(
-        <Text style={{  fontSize: 30 }}>{name}</Text>
-        )}
-      renderItem={({item})=> <Text style={{ textAlign: 'center', fontSize: 25 }}>{item}</Text>}
-      />
-    </View>
-  );
-};
+  render() {
+    return (
+      <View>
+        <Text>Main Class : {this.state.name}</Text>
+        <TextInput placeholder='Enter name : ' onChangeText={(changeName)=>{this.updateName(changeName)}}></TextInput>
+        <ClassComponent name={this.state.name}/>
+      </View>
+    )
+  }
+}
 
 export default App;
