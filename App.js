@@ -4,41 +4,38 @@ import { Text, View, FlatList, Button, TextInput } from 'react-native';
 const App = ()=>{
   const[count,setCount] = useState(0);
   const[data,setData] = useState(100);
-
-  useEffect(()=>{
-    console.warn("Inmain",count);
-  },[count])
-
-  useEffect(()=>{
-    console.warn("Inmain",data);
-  },[data])
+  const[show,setShow] = useState(true);
 
     return (
       <View>
         <Text>Main Class count : {count}</Text>
         <Text>Main Class data : {data}</Text>
-        <Button title='Click me' onPress={()=>{setData(200)}} />
+        <Button title='Click me' onPress={()=>{setShow(!show)}} />
         <TextInput placeholder='Enter name : ' onChangeText={(text)=>{setCount(text.length)}}></TextInput>
-        <Second data={data} count={count}/>
+        {
+          show ? <Second data={data} count={count}/> : null
+        }
       </View>
     )
 }
 
 const Second = (props)=>{
 
-  useEffect(()=>{
-    console.warn("Inchild",props.count);
-  },[props.count])
+  let count = props.count;
+  let data = props.data;
 
   useEffect(()=>{
-    console.warn("Inchild",props.data);
-  },[props.data])
+    return ()=>{console.warn("child",count);}
+  },[count])
+
+  useEffect(()=>{
+    return ()=>{console.warn("child",data);}
+  },[data])
 
     return (
       <View>
         <Text>Child Class count : {props.count}</Text>
         <Text>Child Class data : {props.data}</Text>
-   
       </View>
     )
 }
