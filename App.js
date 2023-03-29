@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button, Modal, Pressable, StatusBar } from 'react-native';
+import { StyleSheet, View, Text, Button, Modal, Pressable, StatusBar, Platform } from 'react-native';
 
 const App = () => {
   const [show,setShow] = useState(true);
   return (
     <View style={styles.main}>
-      <StatusBar 
-      hidden={show}
-      barStyle="default"
-      backgroundColor={'gray'}
-      />
-      <Button title='Shwow statusbar' onPress={()=>setShow(false)}></Button>
+
+    { Platform.OS==='android' ? <Text style={styles.text}>{Platform.OS}</Text> : 
+     <Text style={styles.text}>{Platform.OS}</Text> }
+
+     <Text>ALL Details : {JSON.stringify(Platform)}</Text>
     </View>
   )
 }
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  button: {
+  text: {
     padding: 20,
     backgroundColor: 'gray',
     textAlign: 'center',
