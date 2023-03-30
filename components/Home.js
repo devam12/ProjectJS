@@ -1,10 +1,29 @@
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Button ,TextInput} from 'react-native';
 
-export const Home = (props) => {
-    const name = props.route.params.name;
+export const Home = () => {
+    const[data,setData] = useState({});
+
+    const getAPI = async ()=>{
+        const uri = "https://jsonplaceholder.typicode.com/posts" ;
+        let response = await fetch(uri);
+        response = await response.json();
+        console.warn(response);
+        setData(response);
+    }
+
+    useEffect(()=>{
+        getAPI()
+    },[])
+    
     return (
         <View style={styles.main}>
-            <Text style={styles.modalText}>Welcome {name}</Text>
+            {
+                data.length ? data.map((item,index)=>{
+                    return <View><Text style={styles.text}>ID : {index} </Text><Text style={styles.modalText}>ID : {item.title} </Text></View> 
+                }) : null
+            }
+            
         </View>
     )
 }
@@ -15,12 +34,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     text: {
-        padding: 20,
         backgroundColor: 'gray',
-        textAlign: 'center',
-        color:'red',
         alignItems: 'center',
-        borderRadius: 30
     },
     centeredView: {
         flex: 1,
