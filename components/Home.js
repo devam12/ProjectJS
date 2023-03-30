@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Button ,TextInput} from 'react-native';
+import { StyleSheet, View, Text, Button ,TextInput, ScrollView} from 'react-native';
 
 export const Home = () => {
     const[data,setData] = useState({});
@@ -8,8 +8,17 @@ export const Home = () => {
         const uri = "https://jsonplaceholder.typicode.com/posts" ;
         let response = await fetch(uri);
         response = await response.json();
-        console.warn(response);
         setData(response);
+    }
+
+    const deleteAPI = async (id)=>{
+        const uri = `https://jsonplaceholder.typicode.com/posts/${id}` ;
+        let response = await fetch(uri,{
+            method:'DELETE',
+        });
+        response = await response.json();
+        getAPI();
+        console.warn("deleted");
     }
 
     useEffect(()=>{
@@ -18,12 +27,25 @@ export const Home = () => {
     
     return (
         <View style={styles.main}>
+            <ScrollView>
             {
                 data.length ? data.map((item,index)=>{
-                    return <View><Text style={styles.text}>ID : {index} </Text><Text style={styles.modalText}>ID : {item.title} </Text></View> 
+                    return (
+                    <View style={styles.warpper}>
+                        <View style={{flex:1}}>
+                            <Text style={styles.text}>{index} </Text>
+                        </View> 
+                        <View style={{flex:6}}>
+                            <Text style={styles.modalText}> {item.title} </Text>
+                        </View> 
+                        <View style={{flex:3}}>
+                            <Button title='Delete' onPress={()=>{deleteAPI(item.id)}}></Button>
+                        </View> 
+                    </View>
+                    )
                 }) : null
             }
-            
+            </ScrollView>
         </View>
     )
 }
@@ -31,26 +53,30 @@ export const Home = () => {
 
 const styles = StyleSheet.create({
     main: {
-        flex: 1
+        flex: 1,
+    },
+    warpper:{
+        borderColor:'black',
+        borderWidth : 3,
+        padding: 20,
+        flexDirection:'row',
     },
     text: {
+        padding : 3,
         backgroundColor: 'gray',
         alignItems: 'center',
     },
     centeredView: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
 
     },
     modalView: {
         backgroundColor: 'white',
-        padding: 25,
-        borderRadius: 20
     },
     modalText: {
-        fontSize: 25,
-        marginBottom: 20
+        paddingLeft : 13,
+        alignItems: 'center',
     },
     modalButton: {
         margin: 25
