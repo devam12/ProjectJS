@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import React, { useRef } from 'react';
+import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -9,13 +9,18 @@ import { Login } from './components/Login';
 
 const Tab = createBottomTabNavigator();
 const App = () => {
+  const refName = useRef();
+
+  const checkRef = ()=>{
+    refName.current.focus();  //='DevamGajjar React nativ senior devloper'
+  }
+
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name='Login' component={Login}/>
-        <Tab.Screen name='Home' component={Home}/>
-      </Tab.Navigator>
-    </NavigationContainer>
+   <View>
+    <TextInput ref={refName} placeholder='Enter text'></TextInput>
+    <TextInput placeholder='Enter age'></TextInput>
+    <Button title='Submit' onPress={checkRef}> </Button>
+   </View>
   )
 }
 
