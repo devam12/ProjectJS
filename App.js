@@ -1,23 +1,18 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button, Modal, Pressable, StatusBar, Platform } from 'react-native';
+import React from 'react';
+import { StyleSheet, View , Text } from 'react-native';
+import WebView from 'react-native-webview';
 
 const App = () => {
-  const [show,setShow] = useState(true);
   return (
     <View style={styles.main}>
-
-    { Platform.OS==='android' ? <Text style={styles.text}>{Platform.OS}</Text> : 
-     <Text style={styles.text}>{Platform.OS}</Text> }
-
-     <Text>ALL Details : {JSON.stringify(Platform)}</Text>
+      <WebView source={{uri:"http://devampanchasara.github.io/"}}></WebView>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
-    justifyContent: 'center',
+    flex:1
   },
   text: {
     padding: 20,
