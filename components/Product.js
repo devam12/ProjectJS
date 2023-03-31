@@ -1,25 +1,30 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, Button, TextInput , Image} from 'react-native';
+import { StyleSheet, View, Text, Button, TextInput, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { addToCart } from "./redux/action";
 
 
 export default Product = (props) => {
-    
+
     const item = props.item;
     const dispatch = useDispatch();
-
-    const handleAddToCart = (item)=>{
+    const navigation = useNavigation();
+    const handleAddToCart = (item) => {
         dispatch(addToCart(item));
     }
     return (
         <View style={styles.main}>
-            <Text style={styles.text}>{item.name}</Text>
-            <Text style={styles.text}>{item.color}</Text>
-            <Text style={styles.text}>{item.price}</Text>
-            <View style={styles.imageView}><Image source={{uri:item.image}} style={styles.image}></Image></View>
-            <Button title='add to cart' onPress={()=>handleAddToCart(item)}></Button>
-        </View>
+            <View style={styles.oneItem}>
+                <View style={[styles.imageView, { flex: 1 }]}><Image source={{ uri: item.image }} style={styles.image}></Image></View>
+                <View style={[styles.rightText, { flex: 1 }]}><Text style={styles.text}>{item.name}</Text>
+                    <Text style={styles.text}>{item.color}</Text>
+                    <Text style={styles.text}>{item.price}</Text>
+                </View>
+            </View>
+            <Button style={styles.button} title='add to cart' onPress={() => handleAddToCart(item)}></Button>
+        </View >
     )
 }
 
@@ -27,44 +32,37 @@ export default Product = (props) => {
 const styles = StyleSheet.create({
     main: {
         flex: 1,
+        margin: 20,
         padding: 20,
-        borderBottomColor:'black',
-        borderBottomWidth:3,
-        marginBottom:20,
+        borderBottomColor: 'black',
+        borderWidth: 2,
+        borderRadius: 5,
+        flexDirection: 'column'
     },
-    text: {
-        fontSize:25,
-        padding:1,
-        textAlign:'center'
+    oneItem: {
+        flexDirection: 'row',
     },
-    imageView:{
-        height:300,
-        padding:2,
-    },
-    image:{
-        height:250,
-    },
-    centeredView: {
+    imageView: {
         flex: 1,
-        padding: 20,
-        backgroundColor: 'gray',
-        alignItems: 'center',
-        textAlign: 'center',
-        borderRadius: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-
+        justifyContent: 'flex-start',
+        margin: 5,
     },
-    modalView: {
-        backgroundColor: 'white',
-        padding: 25,
-        borderRadius: 20
+    image: {
+        height: 100,
+        width: 100,
+        marginBottom:15,
     },
-    modalText: {
+    rightText: {
+        alignItems:'flex-start',
+        flex: 1,
         fontSize: 25,
-        marginBottom: 20
     },
-    modalButton: {
-        margin: 25
-    }
+    text:{
+        padding:3,
+        textTransform: 'capitalize',
+    },
+    button: {
+        padding: 10,
+    },
+   
 })
